@@ -17,16 +17,16 @@ class Faction:
         return self.unit_num * self.attack_point / 100
     
     def ReceiveAttack(self, damage):
-        self.unit_num -= damage
+        self.unit_num = self.unit_num - damage
         
 
     def PurchaseWeapons(self, increase_attack, profit):
-        self.attack_point += increase_attack 
+        self.attack_point = self.attack_point + increase_attack 
         return profit
         
         
     def PurchaseArmors(self, increase_health, profit):
-        self.health_point += increase_health 
+        self.health_point = self.health_point + increase_health 
         return profit
     
     def Print(self):
@@ -42,6 +42,6 @@ class Faction:
         print(info)
         
     def EndTurn(self): 
-        self.unit_num += self.reg_num
+        self.unit_num = self.unit_num + self.reg_num
         if self.unit_num <= 0: self.unit_num = 0; self.is_alive = False 
         self.total_health = self.unit_num * self.health_point
