@@ -30,17 +30,22 @@ class Faction:
         return profit
     
     def Print(self):
-        info=f"""
-|\u0305  Faction Name         : {self.name}
-|  Status               : {'Alive' if self.is_alive == True else 'Defeated'}
-|  Number of Units      : {self.unit_num}
-|  Attack Point         : {self.attack_point}
-|  Health Point         : {self.health_point}
-|  Unit Regen Number    : {self.reg_num}
-|\u005f Total Faction Health : {self.total_health}
-        """
-        print(info)
-        
+        print("""
+|  Faction Name         : {} | 
+|  Status               : {} | 
+|  Number of Units      : {} | 
+|  Attack Point         : {} | 
+|  Health Point         : {} | 
+|  Unit Regen Number    : {} | 
+| Total Faction Health : {} | 
+        """.format(self.name,
+        'Alive' if self.is_alive == True else 'Defeated',
+        self.unit_num,
+        self.attack_point,
+        self.health_point,
+        self.reg_num,
+        self.total_health))
+
     def EndTurn(self): 
         self.unit_num = self.unit_num + self.reg_num
         if self.unit_num <= 0: self.unit_num = 0; self.is_alive = False 
