@@ -161,6 +161,65 @@ class Elves(Faction):
         super().Print()        
         
         
+class Merchant:
+    def __init__(self, start_weapon=10, start_armor=10):
+        self.start_weapon = start_weapon
+        self.start_armor = start_armor
+        self.EndTurn()
+        self.revenue = 0
+        
+    def AssgnFaction(self, f, s, t):
+        # first_faction : Orcs second_faction : Dwarwes third_faction : Elves
+        self.first_faction = f 
+        self.second_faction = s 
+        self.third_faction = t 
+        
+    def SellWeapons(self, to_whom, weapons_to_sell):
+        if to_whom == 'Orcs': 
+            to_whom = self.first_faction
+        elif to_whom == 'Dwarves': 
+            to_whom = self.second_faction
+        elif to_whom == 'Elves':
+            to_whom = self.third_faction
+
+        if not to_whom.is_alive: print("The faction you want to sell weapons is dead!")
+        else:
+            if weapons_to_sell > self.weapon_num: 
+                print("You try to sell more weapons than you have in possession")
+                return False
+            
+            else:
+                self.revenue += to_whom.PurchaseWeapons(weapons_to_sell)
+                print("Weapons sold!")
+                self.weapon_num -= weapons_to_sell
+                return True
+        
+        
+    def SellArmors(self, to_whom, armors_to_sell):
+        if to_whom == 'Orcs': 
+            to_whom = self.first_faction
+        elif to_whom == 'Dwarves':
+            to_whom = self.second_faction
+        elif to_whom == 'Elves':
+            to_whom = self.third_faction
+
+        
+        if not to_whom.is_alive: print("The faction you want to sell armors is dead!")
+        else:
+            if armors_to_sell > self.armor_num: 
+                print("You try to sell more armors than you have in possession")
+                return False
+            
+            else:
+                self.revenue += to_whom.PurchaseArmors(armors_to_sell)
+                print("Armors sold!")
+                self.armor_num -= armors_to_sell
+                return True
+            
+    
+    def EndTurn(self): 
+        self.weapon_num = self.start_weapon
+        self.armor_num = self.start_armor
         
         
         
